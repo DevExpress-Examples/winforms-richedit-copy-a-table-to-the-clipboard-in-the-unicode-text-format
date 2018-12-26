@@ -18,6 +18,7 @@ namespace RichEditCustomCopyPaste {
             while (iterator.MoveNext())
                 iterator.Current.Accept(visitor);
         }
+       
         protected override void ExecuteCore() {
             RichEditControl richEditControl = (RichEditControl)Control;
             DocumentRange range = richEditControl.Document.Selection;
@@ -25,10 +26,10 @@ namespace RichEditCustomCopyPaste {
             PlainTextVisitor visitor = new PlainTextVisitor();
             Iterate(visitor, range);
             string plainText = visitor.Text;
-           
+
             DataObject data = new DataObject();
             data.SetData(OfficeDataFormats.UnicodeText, plainText);
-            data.SetData(OfficeDataFormats.Rtf, richEditControl.Document.GetRtfText(richEditControl.Document.Selection));
+            data.SetData(OfficeDataFormats.Rtf, richEditControl.Document.GetRtfText(range));
             Clipboard.Clear();
             Clipboard.SetDataObject(data, false);
         }
@@ -37,9 +38,6 @@ namespace RichEditCustomCopyPaste {
     public class PlainTextVisitor : DocumentVisitorBase
     {
         readonly StringBuilder buffer;
-        bool isInsideTable = false;
-        bool isLastInRow = false;
-
         public string Text { get { return buffer.ToString(); } }
 
         public PlainTextVisitor()
@@ -48,19 +46,19 @@ namespace RichEditCustomCopyPaste {
         }
         public override void Visit(DocumentTableCellBorder cellBorder)
         {
-            isInsideTable = true;
-            isLastInRow = cellBorder.TableCellBorderProperties.IsLastInRow;
+            bool isFirstInRow = cellBorder.TableCellBorderProperties.IsFirstInRow;
+            bool isLastInTable = cellBorder.TableCellBorderProperties.IsLastInTable;
+            if (!isFirstInRow && !isLastInTable)
+            {
+                buffer.Length -= 2;
+                buffer.Append("\t");
+            }
+            
             base.Visit(cellBorder);
         }
-
         public override void Visit(DocumentParagraphEnd paragraphEnd)
         {
-            if (isInsideTable && !isLastInRow)
-                buffer.Append("\t");
-            else
-                buffer.AppendLine();
-
-            isInsideTable = false;
+            buffer.AppendLine();
             base.Visit(paragraphEnd);
         }
         public override void Visit(DocumentText text)
