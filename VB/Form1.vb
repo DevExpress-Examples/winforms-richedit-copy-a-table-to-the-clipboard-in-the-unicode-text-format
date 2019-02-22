@@ -33,8 +33,8 @@ Namespace RichEditCustomCopyPaste
             Me.service = service
         End Sub
 
-        Public Function CreateCommand(ByVal id As RichEditCommandId) As RichEditCommand
-            If id Is RichEditCommandId.CopySelection Then
+        Public Function CreateCommand(ByVal id As RichEditCommandId) As RichEditCommand Implements IRichEditCommandFactoryService.CreateCommand
+            If id = RichEditCommandId.CopySelection Then
                 Return New CustomCopySelectionCommand(control)
             End If
 
