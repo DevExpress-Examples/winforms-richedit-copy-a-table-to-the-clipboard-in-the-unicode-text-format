@@ -4,4 +4,4 @@ You can change this behavior by replacing the default [CopySelectionCommand](htt
 
 See the **ExecuteCore** method implementation of the CustomCopySelectionCommand class in this example. In this method text obtained for the OfficeDataFormats.UnicodeText format is postprocessed to separate cell content with Tab symbols.
 
-See also: [E3665: How to customize copy and paste commands](https://isc.devexpress.com/Thread/WorkplaceDetails/E3665) 
+See also: [E3665: How to customize copy and paste commands](https://www.devexpress.com/Support/Center/Example/Details/E3665/how-to-customize-copy-and-paste-commands) 
