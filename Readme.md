@@ -22,7 +22,7 @@ You can replace the default [CopySelectionCommand](https://documentation.devexpr
 
 * [Commands in Rich Text Editor](https://docs.devexpress.com/WindowsForms/9328/controls-and-libraries/rich-text-editor/commands)
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=winforms-richedit-copy-a-table-to-the-clipboard-in-the-unicode-text-format&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=winforms-richedit-copy-a-table-to-the-clipboard-in-the-unicode-text-format&~~~was_helpful=no)
 
